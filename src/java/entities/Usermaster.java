@@ -6,10 +6,13 @@ package entities;
 
 import java.io.Serializable;
 import java.util.Collection;
+import javax.json.bind.annotation.JsonbTransient;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.Lob;
@@ -25,7 +28,7 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author Admin
+ * @author c computer
  */
 @Entity
 @Table(name = "usermaster")
@@ -34,13 +37,14 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Usermaster.findAll", query = "SELECT u FROM Usermaster u"),
     @NamedQuery(name = "Usermaster.findByUserId", query = "SELECT u FROM Usermaster u WHERE u.userId = :userId"),
     @NamedQuery(name = "Usermaster.findByUsername", query = "SELECT u FROM Usermaster u WHERE u.username = :username"),
+    @NamedQuery(name = "Usermaster.findByName", query = "SELECT u FROM Usermaster u WHERE u.name = :name"),
     @NamedQuery(name = "Usermaster.findByContact", query = "SELECT u FROM Usermaster u WHERE u.contact = :contact")})
 public class Usermaster implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @NotNull
     @Column(name = "user_id")
     private Integer userId;
     @Basic(optional = false)
@@ -56,13 +60,12 @@ public class Usermaster implements Serializable {
     private String password;
     @Basic(optional = false)
     @NotNull
-    @Lob
-    @Size(min = 1, max = 65535)
+    @Size(min = 1, max = 30)
     @Column(name = "name")
     private String name;
     @Basic(optional = false)
     @NotNull
-    @Size(min = 1, max = 15)
+    @Size(min = 1, max = 10)
     @Column(name = "contact")
     private String contact;
     @Basic(optional = false)
@@ -77,11 +80,17 @@ public class Usermaster implements Serializable {
     @Size(min = 1, max = 65535)
     @Column(name = "updated_at")
     private String updatedAt;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "userId")
+    private Collection<TblServiceorder> tblServiceorderCollection;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "userId")
+    private Collection<TblServicecart> tblServicecartCollection;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "userId")
+    private Collection<TblOrder> tblOrderCollection;
     @JoinColumn(name = "group_id", referencedColumnName = "group_id")
     @ManyToOne(optional = false)
     private Groupmaster groupId;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "userId")
-    private Collection<TblServicecart> tblServicecartCollection;
+    private Collection<TblCart> tblCartCollection;
 
     public Usermaster() {
     }
@@ -156,6 +165,36 @@ public class Usermaster implements Serializable {
         this.updatedAt = updatedAt;
     }
 
+    @XmlTransient
+    @JsonbTransient
+    public Collection<TblServiceorder> getTblServiceorderCollection() {
+        return tblServiceorderCollection;
+    }
+
+    public void setTblServiceorderCollection(Collection<TblServiceorder> tblServiceorderCollection) {
+        this.tblServiceorderCollection = tblServiceorderCollection;
+    }
+
+    @XmlTransient
+    @JsonbTransient
+    public Collection<TblServicecart> getTblServicecartCollection() {
+        return tblServicecartCollection;
+    }
+
+    public void setTblServicecartCollection(Collection<TblServicecart> tblServicecartCollection) {
+        this.tblServicecartCollection = tblServicecartCollection;
+    }
+
+    @XmlTransient
+    @JsonbTransient
+    public Collection<TblOrder> getTblOrderCollection() {
+        return tblOrderCollection;
+    }
+
+    public void setTblOrderCollection(Collection<TblOrder> tblOrderCollection) {
+        this.tblOrderCollection = tblOrderCollection;
+    }
+
     public Groupmaster getGroupId() {
         return groupId;
     }
@@ -165,12 +204,13 @@ public class Usermaster implements Serializable {
     }
 
     @XmlTransient
-    public Collection<TblServicecart> getTblServicecartCollection() {
-        return tblServicecartCollection;
+    @JsonbTransient
+    public Collection<TblCart> getTblCartCollection() {
+        return tblCartCollection;
     }
 
-    public void setTblServicecartCollection(Collection<TblServicecart> tblServicecartCollection) {
-        this.tblServicecartCollection = tblServicecartCollection;
+    public void setTblCartCollection(Collection<TblCart> tblCartCollection) {
+        this.tblCartCollection = tblCartCollection;
     }
 
     @Override

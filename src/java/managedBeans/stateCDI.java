@@ -31,15 +31,35 @@ public class stateCDI {
 
     AdminrestClient arc = new AdminrestClient();
     @EJB AdminLocal al;
+    TblState currentState;
+
+    public TblState getCurrentState() {
+        return currentState;
+    }
+
+    public void setCurrentState(TblState currentState) {
+        this.currentState = currentState;
+    }
+    
     Response res;
     Collection<TblState> states;
-    GenericType<Collection<TblState>> gStates;
+    GenericType<Collection<TblState>> gStates = new GenericType<Collection<TblState>>(){
+    };
+    
     DateFormat df = new SimpleDateFormat("DD-MM-YYYY HH:mm:ss");
     Date today = Calendar.getInstance().getTime();
     String datetime = df.format(today);
     
     String stateName, stateCode;
-    Integer uStateId ;
+    Integer stateId ;
+
+    public Integer getStateId() {
+        return stateId;
+    }
+
+    public void setStateId(Integer stateId) {
+        this.stateId = stateId;
+    }
     
     public String getStateName() {
         return stateName;
@@ -61,10 +81,10 @@ public class stateCDI {
     }
     
     public Collection<TblState> viewStates(){
-//        res =   arc.getAllStates(Response.class);
-//        states = res.readEntity(gStates);
-//        return states;
-        return this.al.getAllStates();
+        res =   arc.getAllStates(Response.class);
+        states = res.readEntity(gStates);
+        return states;
+//        return this.al.getAllStates();
     }
     
     public void viewId(){
@@ -74,16 +94,33 @@ public class stateCDI {
     }
     
     public String addState(){
-//        System.out.println(lastId);
-//        System.out.println(stateName);
-//        System.out.println(stateCode);
-        this.al.insertState(6, stateName, stateCode, datetime, datetime);
-        return "viewStates.xhtml";
+//        this.al.insertState(stateName, stateCode, datetime, datetime);
+        this.arc.insertState(stateName, stateCode, datetime, datetime);
+        stateName = null;
+        stateCode = null;
+        return "viewStates.xhtml?faces-redirect=true";
     }
     
     public String deleteState(Integer stateId){
-        this.al.deleteState(stateId);
-        return "viewStates.xhtml";
+//        this.al.deleteState(stateId);
+        this.arc.deleteState(stateId.toString());
+        return "viewStates.xhtml?faces-redirect=true";
     }
     
+    public String redirectToEditState(){
+        return "updateState.xhtml?faces-redirect=true";
+    }
+    
+    public String saveState(){
+        stateName = currentState.getStateName();
+        stateCode = currentState.getStateCode();
+        stateId = currentState.getStateId();
+        
+        this.arc.updateState(stateId.toString(), stateName, stateCode, datetime);
+        
+        stateName = null;
+        stateCode = null;
+        stateId = null;
+        return "viewStates.xhtml?faces-redirect=true";
+    }
 }

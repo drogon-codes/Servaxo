@@ -21,14 +21,14 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
- * @author Admin
+ * @author c computer
  */
 @Entity
 @Table(name = "tbl_servicelist")
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "TblServicelist.findAll", query = "SELECT t FROM TblServicelist t"),
-    @NamedQuery(name = "TblServicelist.findByServiceorderId", query = "SELECT t FROM TblServicelist t WHERE t.tblServicelistPK.serviceorderId = :serviceorderId"),
+    @NamedQuery(name = "TblServicelist.findByUserVehicleId", query = "SELECT t FROM TblServicelist t WHERE t.tblServicelistPK.userVehicleId = :userVehicleId"),
     @NamedQuery(name = "TblServicelist.findByServiceId", query = "SELECT t FROM TblServicelist t WHERE t.tblServicelistPK.serviceId = :serviceId")})
 public class TblServicelist implements Serializable {
 
@@ -47,7 +47,7 @@ public class TblServicelist implements Serializable {
     @Size(min = 1, max = 65535)
     @Column(name = "updated_at")
     private String updatedAt;
-    @JoinColumn(name = "serviceorder_id", referencedColumnName = "serviceorder_id", insertable = false, updatable = false)
+    @JoinColumn(name = "user_vehicle_id", referencedColumnName = "serviceorder_id", insertable = false, updatable = false)
     @ManyToOne(optional = false)
     private TblServiceorder tblServiceorder;
     @JoinColumn(name = "service_id", referencedColumnName = "service_id", insertable = false, updatable = false)
@@ -67,8 +67,8 @@ public class TblServicelist implements Serializable {
         this.updatedAt = updatedAt;
     }
 
-    public TblServicelist(int serviceorderId, int serviceId) {
-        this.tblServicelistPK = new TblServicelistPK(serviceorderId, serviceId);
+    public TblServicelist(int userVehicleId, int serviceId) {
+        this.tblServicelistPK = new TblServicelistPK(userVehicleId, serviceId);
     }
 
     public TblServicelistPK getTblServicelistPK() {

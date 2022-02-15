@@ -21,7 +21,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
- * @author Admin
+ * @author c computer
  */
 @Entity
 @Table(name = "tbl_orderdetail")

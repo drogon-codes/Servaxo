@@ -1,0 +1,73 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+
+    <title>Admin - Cities</title>
+
+    <ui:include src="css.xhtml"/>
+    </h:head>
+    <h:body>
+        <ui:include src="sidebar.xhtml"/>
+        <div class="content ht-100v pd-0">
+            <div class="content-header">
+            </div><!-- content-header -->
+
+            <div class="content-body">
+              <div class="container pd-x-0 pd-lg-x-10 pd-xl-x-0">
+                <div class="d-sm-flex align-items-center justify-content-between mg-b-20 mg-lg-b-30">
+                  <div>
+                    <nav aria-label="breadcrumb">
+                      <ol class="breadcrumb breadcrumb-style1 mg-b-10">
+                        <li class="breadcrumb-item"><a href="dashboard.xhtml">Dashboard</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">Cities</li>
+                      </ol>
+                    </nav>
+                    <h4 class="mg-b-0 tx-spacing--1">Manage Cities - All Cities</h4>
+                  </div>
+                  <div class="d-none d-md-block">
+                      <button class="btn btn-sm pd-x-15 btn-primary btn-uppercase mg-l-5" onclick="window.location='addCity.xhtml'"><i data-feather="plus" class="wd-10 mg-r-5"></i> Add New City</button>
+                  </div>
+                </div>
+
+                <div class="row row-xs">
+                    <h:form>
+                      <div class="card">
+                          <p:dataTable var="city" value="#{cityCDI.getCities()}" class="table dataTable no-footer" rowIndexVar="x" rows="10" paginator="true" paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}" currentPageReportTemplate="{startRecord}-{endRecord} of {totalRecords} records" rowsPerPageTemplate="5,10,{ShowAll|'All'}" paginatorPosition="bottom">
+                              <p:column headerText="#">
+                                  <h:outputText value="#{x+1}" />
+                              </p:column>
+
+                              <p:column headerText="City Name">
+                                  <h:outputText value="#{city.cityName}" />
+                              </p:column>
+                              
+                              <p:column headerText="State">
+                                  <h:outputText value="#{city.stateId.stateName}" />
+                              </p:column>
+                              
+                              <p:column headerText="City Code">
+                                  <h:outputText value="#{city.cityCode}" />
+                              </p:column>
+
+                              <p:column headerText="Actions">
+                                  <h:commandButton class="btn btn-outline-primary btn-sm" value="Edit" action="#{cityCDI.redirectToEditCity}">
+                                      <f:setPropertyActionListener value="#{city}" target="#{cityCDI.currentCity}"/>
+                                  </h:commandButton> &nbsp;
+                                  <h:commandButton class="btn btn-outline-danger btn-sm" value="Delete" action="#{cityCDI.deleteCity(city.cityId)}"/>
+                              </p:column>
+                          </p:dataTable>
+                      </div>
+                  </h:form>   
+                </div><!-- row -->
+              </div><!-- container -->
+            </div>
+          </div><!-- content -->
+    <ui:include src="scripts.xhtml"/>
+    </h:body>
+</html>
+

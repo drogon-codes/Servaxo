@@ -8,6 +8,8 @@ import java.io.Serializable;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.Lob;
@@ -21,7 +23,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
- * @author Admin
+ * @author c computer
  */
 @Entity
 @Table(name = "tbl_cart")
@@ -29,14 +31,13 @@ import javax.xml.bind.annotation.XmlRootElement;
 @NamedQueries({
     @NamedQuery(name = "TblCart.findAll", query = "SELECT t FROM TblCart t"),
     @NamedQuery(name = "TblCart.findByCartId", query = "SELECT t FROM TblCart t WHERE t.cartId = :cartId"),
-    @NamedQuery(name = "TblCart.findByQty", query = "SELECT t FROM TblCart t WHERE t.qty = :qty"),
-@NamedQuery(name = "TblCart.findByUserId", query = "SELECT t FROM TblCart t WHERE t.userId = :userId")})
+    @NamedQuery(name = "TblCart.findByQty", query = "SELECT t FROM TblCart t WHERE t.qty = :qty")})
 public class TblCart implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @NotNull
     @Column(name = "cart_id")
     private Integer cartId;
     @Basic(optional = false)
@@ -55,12 +56,12 @@ public class TblCart implements Serializable {
     @Size(min = 1, max = 65535)
     @Column(name = "updated_at")
     private String updatedAt;
-    @JoinColumn(name = "user_id", referencedColumnName = "user_id")
-    @ManyToOne(optional = false)
-    private Usermaster userId;
     @JoinColumn(name = "part_id", referencedColumnName = "part_id")
     @ManyToOne(optional = false)
     private TblParts partId;
+    @JoinColumn(name = "user_id", referencedColumnName = "user_id")
+    @ManyToOne(optional = false)
+    private Usermaster userId;
 
     public TblCart() {
     }
@@ -108,20 +109,20 @@ public class TblCart implements Serializable {
         this.updatedAt = updatedAt;
     }
 
-    public Usermaster getUserId() {
-        return userId;
-    }
-
-    public void setUserId(Usermaster userId) {
-        this.userId = userId;
-    }
-
     public TblParts getPartId() {
         return partId;
     }
 
     public void setPartId(TblParts partId) {
         this.partId = partId;
+    }
+
+    public Usermaster getUserId() {
+        return userId;
+    }
+
+    public void setUserId(Usermaster userId) {
+        this.userId = userId;
     }
 
     @Override

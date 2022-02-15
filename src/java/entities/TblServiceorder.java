@@ -6,10 +6,13 @@ package entities;
 
 import java.io.Serializable;
 import java.util.Collection;
+import javax.json.bind.annotation.JsonbTransient;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.Lob;
@@ -25,7 +28,7 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author Admin
+ * @author c computer
  */
 @Entity
 @Table(name = "tbl_serviceorder")
@@ -37,14 +40,13 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "TblServiceorder.findByTotalPayment", query = "SELECT t FROM TblServiceorder t WHERE t.totalPayment = :totalPayment"),
     @NamedQuery(name = "TblServiceorder.findByPincode", query = "SELECT t FROM TblServiceorder t WHERE t.pincode = :pincode"),
     @NamedQuery(name = "TblServiceorder.findByLandmark", query = "SELECT t FROM TblServiceorder t WHERE t.landmark = :landmark"),
-    @NamedQuery(name = "TblServiceorder.findByStatus", query = "SELECT t FROM TblServiceorder t WHERE t.status = :status"),
-    @NamedQuery(name = "TblServiceorder.findByUserId", query = "SELECT t FROM TblServiceorder t WHERE t.userId = :userId")})
+    @NamedQuery(name = "TblServiceorder.findByStatus", query = "SELECT t FROM TblServiceorder t WHERE t.status = :status")})
 public class TblServiceorder implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @NotNull
     @Column(name = "serviceorder_id")
     private Integer serviceorderId;
     @Basic(optional = false)
@@ -244,6 +246,7 @@ public class TblServiceorder implements Serializable {
     }
 
     @XmlTransient
+    @JsonbTransient
     public Collection<TblServicelist> getTblServicelistCollection() {
         return tblServicelistCollection;
     }

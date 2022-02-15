@@ -37,9 +37,8 @@ public class User implements UserLocal {
 EntityManager em;
 
     @Override
-    public void registerUser(Integer userId, Integer groupId, String username, String password, String name, String contact, String regDate, String updatedAt) {
+    public void registerUser(Integer groupId, String username, String password, String name, String contact, String regDate, String updatedAt) {
        Usermaster um = new Usermaster();
-       um.setUserId(userId);
        Groupmaster grp = em.find(Groupmaster.class, groupId);
        um.setGroupId(grp);
        um.setUsername(username);
@@ -52,9 +51,8 @@ EntityManager em;
     }
 
     @Override
-    public void addToCart(Integer cart_id, Integer partId, Integer userId, Integer qty, String createdAt, String updatedAt) {
+    public void addToCart(Integer partId, Integer userId, Integer qty, String createdAt, String updatedAt) {
         TblCart tc = new TblCart();
-        tc.setCartId(cart_id);
         TblParts tp = em.find(TblParts.class, partId);
         tc.setPartId(tp);
         Usermaster um = em.find(Usermaster.class, userId);
@@ -89,7 +87,7 @@ EntityManager em;
     }
     
     @Override
-    public void placeOrder(Integer orderId, Integer userId, Integer cityId, String isPay, String payMode, String addressline1, String addressline2, String landmark, Integer pincode, String status, String orderDate, String updatedAt) {
+    public void placeOrder(Integer userId, Integer cityId, String isPay, String payMode, String addressline1, String addressline2, String landmark, Integer pincode, String status, String orderDate, String updatedAt) {
         TblOrder to = new TblOrder();
         Usermaster u = em.find(Usermaster.class, userId);
         TblCity city = em.find(TblCity.class, cityId);
@@ -103,7 +101,6 @@ EntityManager em;
         for(Integer part: parts){
             totalpay = (totalpay + part);
         }
-        to.setOrderId(orderId);
         to.setUserId(u);
         to.setCityId(city);
         to.setTotalPayment(totalpay);
@@ -115,14 +112,13 @@ EntityManager em;
         to.setPincode(pincode);
         to.setStatus(status);
         to.setOrderDatetime(orderDate);
-        to.setUpdatedAt(updatedAt);
+        to.setUpdatesAt(updatedAt);
         em.persist(to);
         em.flush();
 //        Integer orderId = to.getOrderId();
         for(TblCart cart: carts){
             TblOrderdetail td = new TblOrderdetail();
             TblOrderdetailPK tk = new TblOrderdetailPK();
-            tk.setOrderId(orderId);
             tk.setPartId(cart.getPartId().getPartId());
             td.setQty(cart.getQty());
             td.setTblOrderdetailPK(tk);
@@ -141,9 +137,8 @@ EntityManager em;
     }
 
     @Override
-    public void addToServiceCart(Integer servicecart_id, Integer serviceId, Integer userId, String createdAt, String updatedAt) {
+    public void addToServiceCart(Integer serviceId, Integer userId, String createdAt, String updatedAt) {
         TblServicecart tc = new TblServicecart();
-        tc.setServicecartId(servicecart_id);
         TblServices ts = em.find(TblServices.class, serviceId);
         tc.setServiceId(ts);
         Usermaster um = em.find(Usermaster.class, userId);
@@ -170,7 +165,7 @@ EntityManager em;
     }
 
     @Override
-    public void addServiceOrder(Integer serviceOrderId, Integer userId, Integer modelId, String vehicleNo, String remark, String pickupDate, String addressline1, String addressline2, Integer pincode, String landmark, String status, String orderDate, String updatedAt) {
+    public void addServiceOrder(Integer userId, Integer modelId, String vehicleNo, String remark, String pickupDate, String addressline1, String addressline2, Integer pincode, String landmark, String status, String orderDate, String updatedAt) {
         TblServiceorder ts = new TblServiceorder();    
         Usermaster um = em.find(Usermaster.class, userId);
         Iterable<TblServicecart> carts = em.createNamedQuery("TblServicecart.findByUserId").setParameter("userId", um).getResultList();
@@ -183,7 +178,6 @@ EntityManager em;
         for(Integer service: services){
             totalpay = totalpay + service;
         }
-        ts.setServiceorderId(serviceOrderId);
         ts.setUserId(um);
         TblModel tm = em.find(TblModel.class, modelId);
         ts.setModelId(tm);
@@ -203,7 +197,6 @@ EntityManager em;
         for(TblServicecart cart: carts){
             TblServicelist tsl = new TblServicelist();
             TblServicelistPK tslk = new TblServicelistPK();
-            tslk.setServiceorderId(serviceOrderId);
             tslk.setServiceId(cart.getServiceId().getServiceId());
             tsl.setTblServicelistPK(tslk);
             tsl.setCreatedAt(orderDate);

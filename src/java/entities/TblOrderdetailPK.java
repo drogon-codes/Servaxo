@@ -12,7 +12,7 @@ import javax.validation.constraints.NotNull;
 
 /**
  *
- * @author Admin
+ * @author c computer
  */
 @Embeddable
 public class TblOrderdetailPK implements Serializable {

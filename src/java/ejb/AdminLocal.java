@@ -20,7 +20,7 @@ import javax.ejb.Local;
 public interface AdminLocal {
     
     //companies
-    void insertcompany(Integer id, String name,String logo, String type, String createdAt, String updatedAt);
+    void insertcompany(String name,String logo, String type, String createdAt, String updatedAt);
     void deletecompany(Integer id);
     void updateCompany(Integer id, String name, String logo, String type, String updatedAt);
     Collection<TblCompany> getAllCompanies();
@@ -29,7 +29,7 @@ public interface AdminLocal {
     Collection<TblCompany> getCompaniesByType(String type);
     
     //models
-    void insertModel(Integer id, String name, Integer companyId, String image, String createdAt, String updatedAt);
+    void insertModel(String name, Integer companyId, String image, String createdAt, String updatedAt);
     void updateModel(Integer id, String name, Integer companyId, String image, String updatedAt);
     void deleteModel(Integer id);
     Collection<TblModel> getAllModels();
@@ -42,7 +42,7 @@ public interface AdminLocal {
     Collection<TblPartcategory> getPartCategoriesById(Integer id);
     Collection<TblPartcategory> getPartCategoriesByName(String name);
     Collection<TblPartcategory> getPartCategoriesByType(String type);
-    void insertPartCategory(Integer id, String name, String type, String image, String des, String createdAt, String updatedAt);
+    void insertPartCategory(String name, String type, String image, String des, String createdAt, String updatedAt);
     void updatePartCategory(Integer id, String name, String type, String image, String des, String updatedAt);
     void deletePartCategory(Integer id);
     
@@ -52,7 +52,7 @@ public interface AdminLocal {
     Collection<TblParts> getPartsByName(String name);
     Collection<TblParts> getPartsByModel(String model);
     Collection<TblParts> getPartsByCategory(String category);
-    void insertPart(Integer partId, Integer modelId, Integer partCatId, String name, Integer price, String des, String image1, String image2, String image3, String pdf, String url, String isactive, String createdAt, String updatedAt);
+    void insertPart(Integer modelId, Integer partCatId, String name, Integer price, String des, String image1, String image2, String image3, String pdf, String url, String isactive, String createdAt, String updatedAt);
     void updatePart(Integer partId, Integer modelId, Integer partCatId, String name, Integer price, String des, String image1, String image2, String image3, String pdf, String url, String isactive, String updatedAt);
     void updateActivePart(Integer id, String isactive, String updatedAt);
     void deletePart(Integer id);
@@ -62,7 +62,7 @@ public interface AdminLocal {
     Collection<TblServices> getAllServicesById(Integer id);
     Collection<TblServices> getAllServicesByName(String name);
     Collection<TblServices> getAllServicesByType(String type);
-    void insertService(Integer id, String name, String des, Integer price, String isactive, String type, String createdAt, String updatedAt);
+    void insertService(String name, String des, Integer price, String isactive, String type, String createdAt, String updatedAt);
     void updateService(Integer id, String name, String des, Integer price, String isactive, String type, String updatedAt);
     void updateActiveService(Integer id, String isactive, String updatedAt);
     void deleteService(Integer id);
@@ -75,7 +75,7 @@ public interface AdminLocal {
     Collection<TblFeedback> getFeedbacksByEmail(String email);
     
     //State
-    void insertState(Integer id, String name, String code, String createdAt, String updatedAt);
+    void insertState(String name, String code, String createdAt, String updatedAt);
     void updateState(Integer id, String name, String code, String updatedAt);
     void deleteState(Integer id);
     Collection<TblState> getAllStates();
@@ -84,7 +84,7 @@ public interface AdminLocal {
     Collection<TblState> getStatesByCode(String code);
     
     //City
-    void insertCity(Integer id, String name, Integer stateId, String code, String createdAt, String updatedAt);
+    void insertCity(String name, Integer stateId, String code, String createdAt, String updatedAt);
     void updateCity(Integer id, String name, Integer stateId, String code, String updatedAt);
     void deleteCity(Integer id);
     Collection<TblCity> getAllCities();

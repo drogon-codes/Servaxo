@@ -35,17 +35,17 @@ public class UserResource {
     }
     
     @POST
-    @Path("registerUser/{userId}/{groupId}/{username}/{password}/{name}/{contact}/{regDate}/{updatedAt}")
-    public void registerUser(@PathParam("userId") Integer userId , @PathParam("groupId") Integer groupId , @PathParam("username") String username , @PathParam("password") String password , @PathParam("name") String name , @PathParam("contact") String contact , @PathParam("regDate") String regDate , @PathParam("updatedAt") String updatedAt){
-        user.registerUser(userId, groupId, username, password, name, contact, regDate, updatedAt);
+    @Path("registerUser/{groupId}/{username}/{password}/{name}/{contact}/{regDate}/{updatedAt}")
+    public void registerUser(@PathParam("groupId") Integer groupId , @PathParam("username") String username , @PathParam("password") String password , @PathParam("name") String name , @PathParam("contact") String contact , @PathParam("regDate") String regDate , @PathParam("updatedAt") String updatedAt){
+        user.registerUser(groupId, username, password, name, contact, regDate, updatedAt);
     }
     
     //CART MODULE
     
     @POST
-    @Path("addToCart/{cart_id}/{partId}/{userId}/{qty}/{createdAt}/{updatedAt}")
-    public void addToCart(@PathParam("cart_id") Integer cart_id, @PathParam("partId") Integer partId, @PathParam("userId") Integer userId, @PathParam("qty") Integer qty, @PathParam("createdAt") String createdAt, @PathParam("updatedAt") String updatedAt){
-        user.addToCart(cart_id, partId, userId, qty, createdAt, updatedAt);
+    @Path("addToCart/{partId}/{userId}/{qty}/{createdAt}/{updatedAt}")
+    public void addToCart(@PathParam("partId") Integer partId, @PathParam("userId") Integer userId, @PathParam("qty") Integer qty, @PathParam("createdAt") String createdAt, @PathParam("updatedAt") String updatedAt){
+        user.addToCart(partId, userId, qty, createdAt, updatedAt);
     }
     
     @DELETE
@@ -62,9 +62,9 @@ public class UserResource {
     
     //SERVICE CART
     @POST
-    @Path("addToServiceCart/{servicecart_id}/{serviceId}/{userId}/{createdAt}/{updatedAt}")
-    public void addToServiceCart(@PathParam("servicecart_id") Integer servicecart_id, @PathParam("serviceId") Integer serviceId, @PathParam("userId") Integer userId, @PathParam("createdAt") String createdAt, @PathParam("updatedAt") String updatedAt){
-        user.addToServiceCart(servicecart_id, serviceId, userId, createdAt, updatedAt);
+    @Path("addToServiceCart/{serviceId}/{userId}/{createdAt}/{updatedAt}")
+    public void addToServiceCart(@PathParam("serviceId") Integer serviceId, @PathParam("userId") Integer userId, @PathParam("createdAt") String createdAt, @PathParam("updatedAt") String updatedAt){
+        user.addToServiceCart(serviceId, userId, createdAt, updatedAt);
     }
     
     @DELETE
@@ -81,9 +81,9 @@ public class UserResource {
     
     //PART ORDER MODULE
     @POST
-    @Path("placeOrder/{orderId}/{userId}/{cityId}/{isPay}/{payMode}/{addressline1}/{addressline2}/{landmark}/{pincode}/{status}/{orderDate}/{updatedAt}")
-    public void placeOrder(@PathParam("orderId") Integer orderId, @PathParam("userId") Integer userId, @PathParam("cityId") Integer cityId, @PathParam("isPay") String isPay, @PathParam("payMode") String payMode, @PathParam("addressline1") String addressline1, @PathParam("addressline2") String addressline2, @PathParam("landmark") String landmark, @PathParam("pincode") Integer pincode, @PathParam("status") String status, @PathParam("orderDate") String orderDate, @PathParam("updatedAt") String updatedAt){
-        user.placeOrder(orderId, userId, cityId, isPay, payMode, addressline1, addressline2, landmark, pincode, status, orderDate, updatedAt);
+    @Path("placeOrder/{userId}/{cityId}/{isPay}/{payMode}/{addressline1}/{addressline2}/{landmark}/{pincode}/{status}/{orderDate}/{updatedAt}")
+    public void placeOrder(@PathParam("userId") Integer userId, @PathParam("cityId") Integer cityId, @PathParam("isPay") String isPay, @PathParam("payMode") String payMode, @PathParam("addressline1") String addressline1, @PathParam("addressline2") String addressline2, @PathParam("landmark") String landmark, @PathParam("pincode") Integer pincode, @PathParam("status") String status, @PathParam("orderDate") String orderDate, @PathParam("updatedAt") String updatedAt){
+        user.placeOrder(userId, cityId, isPay, payMode, addressline1, addressline2, landmark, pincode, status, orderDate, updatedAt);
     }
     
     @GET
@@ -101,9 +101,9 @@ public class UserResource {
     
     //SERVICE ORDER MODULE
     @POST
-    @Path("addServiceOrder/{serviceOrderId}/{userId}/{modelId}/{vehicleNo}/{remark}/{pickupDate}/{addressline1}/{addressline2}/{pincode}/{landmark}/{status}/{orderDate}/{updatedAt}")
-    public void addServiceOrder(@PathParam("serviceOrderId") Integer serviceOrderId, @PathParam("userId") Integer userId, @PathParam("modelId") Integer modelId, @PathParam("vehicleNo") String vehicleNo, @PathParam("remark") String remark, @PathParam("pickupDate") String pickupDate, @PathParam("addressline1") String addressline1, @PathParam("addressline2") String addressline2, @PathParam("pincode") Integer pincode, @PathParam("landmark") String landmark, @PathParam("status") String status, @PathParam("orderDate") String orderDate, @PathParam("updatedAt") String updatedAt){
-        user.addServiceOrder(serviceOrderId, userId, modelId, vehicleNo, remark, pickupDate, addressline1, addressline2, pincode, landmark, status, orderDate, updatedAt);
+    @Path("addServiceOrder/{userId}/{modelId}/{vehicleNo}/{remark}/{pickupDate}/{addressline1}/{addressline2}/{pincode}/{landmark}/{status}/{orderDate}/{updatedAt}")
+    public void addServiceOrder(Integer serviceOrderId, @PathParam("userId") Integer userId, @PathParam("modelId") Integer modelId, @PathParam("vehicleNo") String vehicleNo, @PathParam("remark") String remark, @PathParam("pickupDate") String pickupDate, @PathParam("addressline1") String addressline1, @PathParam("addressline2") String addressline2, @PathParam("pincode") Integer pincode, @PathParam("landmark") String landmark, @PathParam("status") String status, @PathParam("orderDate") String orderDate, @PathParam("updatedAt") String updatedAt){
+        user.addServiceOrder(userId, modelId, vehicleNo, remark, pickupDate, addressline1, addressline2, pincode, landmark, status, orderDate, updatedAt);
     }
     
     @PUT

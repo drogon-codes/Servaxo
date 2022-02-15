@@ -38,9 +38,8 @@ public class Admin implements AdminLocal {
     Collection<TblOrderdetail> TblOrderdetail;
             
     @Override
-    public void insertcompany(Integer id, String name, String logo, String type, String createdAt, String updatedAt) {
+    public void insertcompany(String name, String logo, String type, String createdAt, String updatedAt) {
         TblCompany tc = new TblCompany();
-        tc.setCompanyId(id);
         tc.setCompanyName(name);
         tc.setCompanyLogo(logo);
         tc.setCompanyType(type);
@@ -51,10 +50,9 @@ public class Admin implements AdminLocal {
     }
 
     @Override
-    public void insertModel(Integer id, String name, Integer companyId, String image, String createdAt, String updatedAt) {
+    public void insertModel(String name, Integer companyId, String image, String createdAt, String updatedAt) {
         TblModel tm = new TblModel();
         TblCompany tc = em.find(TblCompany.class, companyId);
-        tm.setModelId(id);
         tm.setModelName(name);
         tm.setCompanyId(tc);
         tm.setModelImg(image);
@@ -171,9 +169,8 @@ public class Admin implements AdminLocal {
     }
 
     @Override
-    public void insertPartCategory(Integer id, String name, String type, String image, String des, String createdAt, String updatedAt) {
+    public void insertPartCategory(String name, String type, String image, String des, String createdAt, String updatedAt) {
         TblPartcategory tpc = new TblPartcategory();
-        tpc.setPartcategoryId(id);
         tpc.setCategoryName(name);
         tpc.setVehicleType(type);
         tpc.setCategoryImg(image);
@@ -233,9 +230,8 @@ public class Admin implements AdminLocal {
     }
 
     @Override
-    public void insertPart(Integer partId, Integer modelId, Integer partCatId, String name, Integer price, String des, String image1, String image2, String image3, String pdf, String url, String isactive, String createdAt, String updatedAt) {
+    public void insertPart(Integer modelId, Integer partCatId, String name, Integer price, String des, String image1, String image2, String image3, String pdf, String url, String isactive, String createdAt, String updatedAt) {
         TblParts tp = new TblParts();
-        tp.setPartId(partId);
         TblModel tm = em.find(TblModel.class, modelId);
         tp.setModelId(tm);
         TblPartcategory tpc = em.find(TblPartcategory.class, partCatId);
@@ -313,9 +309,8 @@ public class Admin implements AdminLocal {
     }
 
     @Override
-    public void insertService(Integer id, String name, String des, Integer price, String isactive, String type, String createdAt, String updatedAt) {
+    public void insertService(String name, String des, Integer price, String isactive, String type, String createdAt, String updatedAt) {
         TblServices ts = new TblServices();
-        ts.setServiceId(id);
         ts.setServiceName(name);
         ts.setServiceDescription(des);
         ts.setServicePrice(price);
@@ -383,9 +378,8 @@ public class Admin implements AdminLocal {
     }
 
     @Override
-    public void insertState(Integer id, String name, String code, String createdAt, String updatedAt) {
+    public void insertState(String name, String code, String createdAt, String updatedAt) {
         TblState s = new TblState();
-        s.setStateId(id);
         s.setStateName(name);
         s.setStateCode(code);
         s.setCreatedAt(createdAt);
@@ -433,9 +427,8 @@ public class Admin implements AdminLocal {
     }
 
     @Override
-    public void insertCity(Integer id, String name, Integer stateId, String code, String createdAt, String updatedAt) {
+    public void insertCity(String name, Integer stateId, String code, String createdAt, String updatedAt) {
         TblCity city = new TblCity();
-        city.setCityId(id);
         city.setCityName(name);
         TblState state = em.find(TblState.class, stateId);
         city.setStateId(state);
@@ -542,7 +535,7 @@ public class Admin implements AdminLocal {
     public void updateorderStatus(Integer OrderId, String status, String updatedAt) {
         TblOrder to = em.find(TblOrder.class, OrderId);
         to.setStatus(status);
-        to.setUpdatedAt(updatedAt);
+        to.setUpdatesAt(updatedAt);
         em.merge(to);
     }
 

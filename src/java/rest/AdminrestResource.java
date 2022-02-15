@@ -51,10 +51,10 @@ public class AdminrestResource {
     }
 
     @POST
-    @Path("addcompany/{id}/{name}/{type}/{createdat}/{updatedat}")
+    @Path("addcompany/{name}/{type}/{createdat}/{updatedat}")
     @Consumes(MediaType.APPLICATION_JSON)
-    public void insertcompany(@PathParam("id") Integer id, @PathParam("name") String name, String logo, @PathParam("type") String type, @PathParam("createdat") String createdAt, @PathParam("updatedat") String updatedAt){
-        admin.insertcompany(id, name, logo, type, createdAt, updatedAt);
+    public void insertcompany(@PathParam("name") String name, String logo, @PathParam("type") String type, @PathParam("createdat") String createdAt, @PathParam("updatedat") String updatedAt){
+        admin.insertcompany(name, logo, type, createdAt, updatedAt);
     }
     @PUT
     @Path("updatecompany/{id}/{name}/{type}/{updatedat}")
@@ -98,10 +98,10 @@ public class AdminrestResource {
     }
     
     @POST
-    @Path("addmodel/{id}/{name}/{companyid}/{createdat}/{updatedat}")
+    @Path("addmodel/{name}/{companyid}/{createdat}/{updatedat}")
     @Consumes(MediaType.APPLICATION_JSON)
-    public void insertModel(@PathParam("id")Integer id, @PathParam("name")String name, @PathParam("companyid")Integer companyId, String image, @PathParam("createdat")String createdAt, @PathParam("updatedat")String updatedAt){
-        admin.insertModel(id, name, companyId, image, createdAt, updatedAt);
+    public void insertModel(@PathParam("name")String name, @PathParam("companyid")Integer companyId, String image, @PathParam("createdat")String createdAt, @PathParam("updatedat")String updatedAt){
+        admin.insertModel(name, companyId, image, createdAt, updatedAt);
     }
     
     @PUT
@@ -146,10 +146,10 @@ public class AdminrestResource {
     }
     
     @POST
-    @Path("addpartcategory/{id}/{name}/{type}/{description}/{createdat}/{updatedat}")
+    @Path("addpartcategory/{name}/{type}/{description}/{createdat}/{updatedat}")
     @Consumes(MediaType.APPLICATION_JSON)
-    public void insertPartCategory(@PathParam("id")Integer id, @PathParam("name")String name, @PathParam("type")String type, String image, @PathParam("description")String des, @PathParam("createdat")String createdAt, @PathParam("updatedat")String updatedAt){
-        admin.insertPartCategory(id, name, type, image, des, createdAt, updatedAt);
+    public void insertPartCategory(@PathParam("name")String name, @PathParam("type")String type, String image, @PathParam("description")String des, @PathParam("createdat")String createdAt, @PathParam("updatedat")String updatedAt){
+        admin.insertPartCategory(name, type, image, des, createdAt, updatedAt);
     }
     
     @PUT
@@ -194,9 +194,9 @@ public class AdminrestResource {
     }
     
     @POST
-    @Path("addparts/{id}/{modelid}/{partcatid}/{name}/{price}/{description}/{image1}/{image2}/{image3}/{pdf}/{url}/{isactive}/{createdat}/{updatedat}")
-    public void insertPart(@PathParam("id")Integer partId, @PathParam("modelid")Integer modelId, @PathParam("partcatid")Integer partCatId, @PathParam("name")String name, @PathParam("price")Integer price, @PathParam("description")String des, @PathParam("image1")String image1, @PathParam("image2")String image2, @PathParam("image3")String image3, @PathParam("pdf")String pdf, @PathParam("url")String url, @PathParam("isactive")String isactive, @PathParam("createdat")String createdAt, @PathParam("updatedat")String updatedAt){
-        admin.insertPart(partId, modelId, partCatId, name, price, des, image1, image2, image3, pdf, url, isactive, createdAt, updatedAt);
+    @Path("addparts/{modelid}/{partcatid}/{name}/{price}/{description}/{image1}/{image2}/{image3}/{pdf}/{url}/{isactive}/{createdat}/{updatedat}")
+    public void insertPart(@PathParam("modelid")Integer modelId, @PathParam("partcatid")Integer partCatId, @PathParam("name")String name, @PathParam("price")Integer price, @PathParam("description")String des, @PathParam("image1")String image1, @PathParam("image2")String image2, @PathParam("image3")String image3, @PathParam("pdf")String pdf, @PathParam("url")String url, @PathParam("isactive")String isactive, @PathParam("createdat")String createdAt, @PathParam("updatedat")String updatedAt){
+        admin.insertPart(modelId, partCatId, name, price, des, image1, image2, image3, pdf, url, isactive, createdAt, updatedAt);
     }
     
     @PUT
@@ -253,9 +253,9 @@ public class AdminrestResource {
     }
     
     @POST
-    @Path("addservice/{id}/{name}/{description}/{price}/{isactive}/{type}/{createdat}/{updatedat}")
-    public void insertService(@PathParam("id")Integer id, @PathParam("name")String name, @PathParam("description")String des, @PathParam("price")Integer price, @PathParam("isactive")String isactive, @PathParam("type")String type, @PathParam("createdat")String createdAt, @PathParam("updatedat")String updatedAt){
-        admin.insertService(id, name, des, price, isactive, type, createdAt, updatedAt);
+    @Path("addservice/{name}/{description}/{price}/{isactive}/{type}/{createdat}/{updatedat}")
+    public void insertService(@PathParam("name")String name, @PathParam("description")String des, @PathParam("price")Integer price, @PathParam("isactive")String isactive, @PathParam("type")String type, @PathParam("createdat")String createdAt, @PathParam("updatedat")String updatedAt){
+        admin.insertService(name, des, price, isactive, type, createdAt, updatedAt);
     }
     
     @PUT
@@ -340,9 +340,9 @@ public class AdminrestResource {
     }
     
     @POST
-    @Path("addstate/{id}/{name}/{code}/{createdat}/{updatedat}")
-    public void insertState(@PathParam("id")Integer id, @PathParam("name")String name, @PathParam("code")String code, @PathParam("createdat")String createdAt, @PathParam("updatedat")String updatedAt){
-        admin.insertState(id, name, code, createdAt, updatedAt);
+    @Path("addstate/{name}/{code}/{createdat}/{updatedat}")
+    public void insertState(@PathParam("name")String name, @PathParam("code")String code, @PathParam("createdat")String createdAt, @PathParam("updatedat")String updatedAt){
+        admin.insertState(name, code, createdAt, updatedAt);
     }
     
     @PUT
@@ -386,9 +386,9 @@ public class AdminrestResource {
     }
     
     @POST
-    @Path("addcity/{id}/{name}/{stateid}/{code}/{createdat}/{updatedat}")
-    public void insertCity(@PathParam("id")Integer id, @PathParam("name")String name, @PathParam("stateid")Integer stateId, @PathParam("code")String code, @PathParam("createdat")String createdAt, @PathParam("updatedat")String updatedAt){
-        admin.insertCity(id, name, stateId, code, createdAt, updatedAt);
+    @Path("addcity/{name}/{stateid}/{code}/{createdat}/{updatedat}")
+    public void insertCity(@PathParam("name")String name, @PathParam("stateid")Integer stateId, @PathParam("code")String code, @PathParam("createdat")String createdAt, @PathParam("updatedat")String updatedAt){
+        admin.insertCity(name, stateId, code, createdAt, updatedAt);
     }
     
     @PUT

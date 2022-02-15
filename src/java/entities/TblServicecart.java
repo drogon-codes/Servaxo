@@ -8,6 +8,8 @@ import java.io.Serializable;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.Lob;
@@ -21,21 +23,20 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
- * @author Admin
+ * @author c computer
  */
 @Entity
 @Table(name = "tbl_servicecart")
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "TblServicecart.findAll", query = "SELECT t FROM TblServicecart t"),
-    @NamedQuery(name = "TblServicecart.findByServicecartId", query = "SELECT t FROM TblServicecart t WHERE t.servicecartId = :servicecartId"),
-@NamedQuery(name = "TblServicecart.findByUserId", query = "SELECT t FROM TblServicecart t WHERE t.userId = :userId")})
+    @NamedQuery(name = "TblServicecart.findByServicecartId", query = "SELECT t FROM TblServicecart t WHERE t.servicecartId = :servicecartId")})
 public class TblServicecart implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @NotNull
     @Column(name = "servicecart_id")
     private Integer servicecartId;
     @Basic(optional = false)

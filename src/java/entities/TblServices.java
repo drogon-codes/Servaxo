@@ -6,10 +6,13 @@ package entities;
 
 import java.io.Serializable;
 import java.util.Collection;
+import javax.json.bind.annotation.JsonbTransient;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Lob;
 import javax.persistence.NamedQueries;
@@ -23,7 +26,7 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author Admin
+ * @author c computer
  */
 @Entity
 @Table(name = "tbl_services")
@@ -39,8 +42,8 @@ public class TblServices implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @NotNull
     @Column(name = "service_id")
     private Integer serviceId;
     @Basic(optional = false)
@@ -80,6 +83,8 @@ public class TblServices implements Serializable {
     private String updatedAt;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "serviceId")
     private Collection<TblServicecart> tblServicecartCollection;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "tblServices")
+    private Collection<TblServicelist> tblServicelistCollection;
 
     public TblServices() {
     }
@@ -163,12 +168,22 @@ public class TblServices implements Serializable {
     }
 
     @XmlTransient
+    @JsonbTransient
     public Collection<TblServicecart> getTblServicecartCollection() {
         return tblServicecartCollection;
     }
 
     public void setTblServicecartCollection(Collection<TblServicecart> tblServicecartCollection) {
         this.tblServicecartCollection = tblServicecartCollection;
+    }
+
+    @XmlTransient
+    public Collection<TblServicelist> getTblServicelistCollection() {
+        return tblServicelistCollection;
+    }
+
+    public void setTblServicelistCollection(Collection<TblServicelist> tblServicelistCollection) {
+        this.tblServicelistCollection = tblServicelistCollection;
     }
 
     @Override

@@ -6,10 +6,13 @@ package entities;
 
 import java.io.Serializable;
 import java.util.Collection;
+import javax.json.bind.annotation.JsonbTransient;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Lob;
 import javax.persistence.NamedQueries;
@@ -23,7 +26,7 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author Admin
+ * @author c computer
  */
 @Entity
 @Table(name = "tbl_state")
@@ -37,8 +40,8 @@ public class TblState implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @NotNull
     @Column(name = "state_id")
     private Integer stateId;
     @Basic(optional = false)
@@ -51,12 +54,16 @@ public class TblState implements Serializable {
     @Size(min = 1, max = 5)
     @Column(name = "state_code")
     private String stateCode;
+    @Basic(optional = false)
+    @NotNull
     @Lob
-    @Size(max = 65535)
+    @Size(min = 1, max = 65535)
     @Column(name = "created_at")
     private String createdAt;
+    @Basic(optional = false)
+    @NotNull
     @Lob
-    @Size(max = 65535)
+    @Size(min = 1, max = 65535)
     @Column(name = "updated_at")
     private String updatedAt;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "stateId")
@@ -69,10 +76,12 @@ public class TblState implements Serializable {
         this.stateId = stateId;
     }
 
-    public TblState(Integer stateId, String stateName, String stateCode) {
+    public TblState(Integer stateId, String stateName, String stateCode, String createdAt, String updatedAt) {
         this.stateId = stateId;
         this.stateName = stateName;
         this.stateCode = stateCode;
+        this.createdAt = createdAt;
+        this.updatedAt = updatedAt;
     }
 
     public Integer getStateId() {
@@ -116,6 +125,7 @@ public class TblState implements Serializable {
     }
 
     @XmlTransient
+    @JsonbTransient
     public Collection<TblCity> getTblCityCollection() {
         return tblCityCollection;
     }

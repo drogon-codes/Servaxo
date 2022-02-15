@@ -10,6 +10,8 @@ import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.Lob;
@@ -25,7 +27,7 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author Admin
+ * @author c computer
  */
 @Entity
 @Table(name = "tbl_order")
@@ -37,14 +39,13 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "TblOrder.findByIspay", query = "SELECT t FROM TblOrder t WHERE t.ispay = :ispay"),
     @NamedQuery(name = "TblOrder.findByPaymode", query = "SELECT t FROM TblOrder t WHERE t.paymode = :paymode"),
     @NamedQuery(name = "TblOrder.findByPincode", query = "SELECT t FROM TblOrder t WHERE t.pincode = :pincode"),
-    @NamedQuery(name = "TblOrder.findByStatus", query = "SELECT t FROM TblOrder t WHERE t.status = :status"),
-    @NamedQuery(name = "TblOrder.findByUserId", query = "SELECT t FROM TblOrder t WHERE t.userId = :userId")})
+    @NamedQuery(name = "TblOrder.findByStatus", query = "SELECT t FROM TblOrder t WHERE t.status = :status")})
 public class TblOrder implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @NotNull
     @Column(name = "order_id")
     private Integer orderId;
     @Basic(optional = false)
@@ -94,14 +95,14 @@ public class TblOrder implements Serializable {
     @NotNull
     @Lob
     @Size(min = 1, max = 65535)
-    @Column(name = "updated_at")
-    private String updatedAt;
-    @JoinColumn(name = "user_id", referencedColumnName = "user_id")
-    @ManyToOne(optional = false)
-    private Usermaster userId;
+    @Column(name = "updates_at")
+    private String updatesAt;
     @JoinColumn(name = "city_id", referencedColumnName = "city_id")
     @ManyToOne(optional = false)
     private TblCity cityId;
+    @JoinColumn(name = "user_id", referencedColumnName = "user_id")
+    @ManyToOne(optional = false)
+    private Usermaster userId;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "tblOrder")
     private Collection<TblOrderdetail> tblOrderdetailCollection;
 
@@ -112,7 +113,7 @@ public class TblOrder implements Serializable {
         this.orderId = orderId;
     }
 
-    public TblOrder(Integer orderId, int totalPayment, String ispay, String paymode, String addressline1, int pincode, String status, String orderDatetime, String updatedAt) {
+    public TblOrder(Integer orderId, int totalPayment, String ispay, String paymode, String addressline1, int pincode, String status, String orderDatetime, String updatesAt) {
         this.orderId = orderId;
         this.totalPayment = totalPayment;
         this.ispay = ispay;
@@ -121,7 +122,7 @@ public class TblOrder implements Serializable {
         this.pincode = pincode;
         this.status = status;
         this.orderDatetime = orderDatetime;
-        this.updatedAt = updatedAt;
+        this.updatesAt = updatesAt;
     }
 
     public Integer getOrderId() {
@@ -204,20 +205,12 @@ public class TblOrder implements Serializable {
         this.orderDatetime = orderDatetime;
     }
 
-    public String getUpdatedAt() {
-        return updatedAt;
+    public String getUpdatesAt() {
+        return updatesAt;
     }
 
-    public void setUpdatedAt(String updatedAt) {
-        this.updatedAt = updatedAt;
-    }
-
-    public Usermaster getUserId() {
-        return userId;
-    }
-
-    public void setUserId(Usermaster userId) {
-        this.userId = userId;
+    public void setUpdatesAt(String updatesAt) {
+        this.updatesAt = updatesAt;
     }
 
     public TblCity getCityId() {
@@ -226,6 +219,14 @@ public class TblOrder implements Serializable {
 
     public void setCityId(TblCity cityId) {
         this.cityId = cityId;
+    }
+
+    public Usermaster getUserId() {
+        return userId;
+    }
+
+    public void setUserId(Usermaster userId) {
+        this.userId = userId;
     }
 
     @XmlTransient

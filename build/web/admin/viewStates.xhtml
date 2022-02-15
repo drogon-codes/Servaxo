@@ -3,7 +3,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-      xmlns:p="http://primefaces.org/ui">
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
     <h:head>
 
     <title>Admin - States</title>
@@ -36,10 +37,10 @@
                 <div class="row row-xs">
                     <h:form>
                       <div class="card">
-                          <p:dataTable var="state" value="#{stateCDI.viewStates()}" class="table dataTable no-footer">
-<!--                              <p:column headerText="#">
-                                  <h:outputText value="#{stateCDI.viewId()}" />
-                              </p:column>-->
+                          <p:dataTable var="state" value="#{stateCDI.viewStates()}" class="table dataTable no-footer" rowIndexVar="x" rows="10" paginator="true" paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}" currentPageReportTemplate="{startRecord}-{endRecord} of {totalRecords} records" rowsPerPageTemplate="5,10,{ShowAll|'All'}" paginatorPosition="bottom">
+                              <p:column headerText="#">
+                                  <h:outputText value="#{x+1}" />
+                              </p:column>
 
                               <p:column headerText="State Name">
                                   <h:outputText value="#{state.stateName}" />
@@ -50,8 +51,10 @@
                               </p:column>
 
                               <p:column headerText="Actions">
-                                  <p:commandButton styleClass="ui-button-outlined ui-button-primary" value="Edit"/>
-                                  <p:commandButton styleClass="ui-button-outlined ui-button-danger" value="Delete" action="#{stateCDI.deleteState(state.stateId)}"/>
+                                  <h:commandButton class="btn btn-outline-primary btn-sm" value="Edit" action="#{stateCDI.redirectToEditState}">
+                                      <f:setPropertyActionListener value="#{state}" target="#{stateCDI.currentState}"/>
+                                  </h:commandButton>&nbsp;
+                                  <h:commandButton class="btn btn-outline-danger btn-sm" value="Delete" action="#{stateCDI.deleteState(state.stateId)}"/>
                               </p:column>
                           </p:dataTable>
                       </div>

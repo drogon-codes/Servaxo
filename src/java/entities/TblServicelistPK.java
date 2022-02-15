@@ -12,15 +12,15 @@ import javax.validation.constraints.NotNull;
 
 /**
  *
- * @author Admin
+ * @author c computer
  */
 @Embeddable
 public class TblServicelistPK implements Serializable {
 
     @Basic(optional = false)
     @NotNull
-    @Column(name = "serviceorder_id")
-    private int serviceorderId;
+    @Column(name = "user_vehicle_id")
+    private int userVehicleId;
     @Basic(optional = false)
     @NotNull
     @Column(name = "service_id")
@@ -29,17 +29,17 @@ public class TblServicelistPK implements Serializable {
     public TblServicelistPK() {
     }
 
-    public TblServicelistPK(int serviceorderId, int serviceId) {
-        this.serviceorderId = serviceorderId;
+    public TblServicelistPK(int userVehicleId, int serviceId) {
+        this.userVehicleId = userVehicleId;
         this.serviceId = serviceId;
     }
 
-    public int getServiceorderId() {
-        return serviceorderId;
+    public int getUserVehicleId() {
+        return userVehicleId;
     }
 
-    public void setServiceorderId(int serviceorderId) {
-        this.serviceorderId = serviceorderId;
+    public void setUserVehicleId(int userVehicleId) {
+        this.userVehicleId = userVehicleId;
     }
 
     public int getServiceId() {
@@ -53,7 +53,7 @@ public class TblServicelistPK implements Serializable {
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (int) serviceorderId;
+        hash += (int) userVehicleId;
         hash += (int) serviceId;
         return hash;
     }
@@ -65,7 +65,7 @@ public class TblServicelistPK implements Serializable {
             return false;
         }
         TblServicelistPK other = (TblServicelistPK) object;
-        if (this.serviceorderId != other.serviceorderId) {
+        if (this.userVehicleId != other.userVehicleId) {
             return false;
         }
         if (this.serviceId != other.serviceId) {
@@ -76,7 +76,7 @@ public class TblServicelistPK implements Serializable {
 
     @Override
     public String toString() {
-        return "entities.TblServicelistPK[ serviceorderId=" + serviceorderId + ", serviceId=" + serviceId + " ]";
+        return "entities.TblServicelistPK[ userVehicleId=" + userVehicleId + ", serviceId=" + serviceId + " ]";
     }
     
 }
