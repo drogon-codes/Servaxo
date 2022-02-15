@@ -59,8 +59,9 @@ public class AdminrestClient {
         webTarget.path(java.text.MessageFormat.format("updateparts/{0}/{1}/{2}/{3}/{4}/{5}/{6}/{7}/{8}/{9}/{10}/{11}/{12}", new Object[]{id, modelid, partcatid, name, price, description, image1, image2, image3, pdf, url, isactive, updatedat})).request().put(empty);
     }
 
-    public void updateCompany(Object requestEntity, String id, String name, String type, String updatedat) throws ClientErrorException {
-        webTarget.path(java.text.MessageFormat.format("updatecompany/{0}/{1}/{2}/{3}", new Object[]{id, name, type, updatedat})).request(javax.ws.rs.core.MediaType.APPLICATION_JSON).put(javax.ws.rs.client.Entity.entity(requestEntity, javax.ws.rs.core.MediaType.APPLICATION_JSON));
+    public void updateCompany(String id, String name, String type, String updatedat) throws ClientErrorException {
+        Entity<?> empty = Entity.text("");
+        webTarget.path(java.text.MessageFormat.format("updatecompany/{0}/{1}/{2}/{3}", new Object[]{id, name, type, updatedat})).request().put(empty);
     }
 
     public void updateActivePart(String id, String isactive, String updatedat) throws ClientErrorException {
@@ -134,8 +135,8 @@ public class AdminrestClient {
         return resource.request(javax.ws.rs.core.MediaType.APPLICATION_JSON).get(responseType);
     }
 
-    public void insertPartCategory(Object requestEntity, String name, String type, String description, String createdat, String updatedat) throws ClientErrorException {
-        webTarget.path(java.text.MessageFormat.format("addpartcategory/{0}/{1}/{2}/{3}/{4}", new Object[]{name, type, description, createdat, updatedat})).request(javax.ws.rs.core.MediaType.APPLICATION_JSON).post(javax.ws.rs.client.Entity.entity(requestEntity, javax.ws.rs.core.MediaType.APPLICATION_JSON));
+    public void insertPartCategory(String name, String type, String image, String description, String createdat, String updatedat) throws ClientErrorException {
+        webTarget.path(java.text.MessageFormat.format("addpartcategory/{0}/{1}/{2}/{3}/{4}/{5}", new Object[]{name, type, image, description, createdat, updatedat})).request().post(null);
     }
 
     public void updateorderStatus(String id, String status, String updatedat) throws ClientErrorException {
@@ -143,8 +144,8 @@ public class AdminrestClient {
         webTarget.path(java.text.MessageFormat.format("updateorder/{0}/{1}/{2}", new Object[]{id, status, updatedat})).request().put(empty);
     }
 
-    public void insertModel(Object requestEntity, String name, String companyid, String createdat, String updatedat) throws ClientErrorException {
-        webTarget.path(java.text.MessageFormat.format("addmodel/{0}/{1}/{2}/{3}", new Object[]{name, companyid, createdat, updatedat})).request(javax.ws.rs.core.MediaType.APPLICATION_JSON).post(javax.ws.rs.client.Entity.entity(requestEntity, javax.ws.rs.core.MediaType.APPLICATION_JSON));
+    public void insertModel(String name, String companyid, String createdat, String updatedat) throws ClientErrorException {
+        webTarget.path(java.text.MessageFormat.format("addmodel/{0}/{1}/{2}/{3}", new Object[]{name, companyid, createdat, updatedat})).request().post(null);
     }
 
     public <T> T getAllFeedbacks(Class<T> responseType) throws ClientErrorException {
@@ -153,8 +154,9 @@ public class AdminrestClient {
         return resource.request(javax.ws.rs.core.MediaType.APPLICATION_JSON).get(responseType);
     }
 
-    public void updateModel(Object requestEntity, String id, String name, String companyid, String updatedat) throws ClientErrorException {
-        webTarget.path(java.text.MessageFormat.format("updatemodel/{0}/{1}/{2}/{3}", new Object[]{id, name, companyid, updatedat})).request(javax.ws.rs.core.MediaType.APPLICATION_JSON).put(javax.ws.rs.client.Entity.entity(requestEntity, javax.ws.rs.core.MediaType.APPLICATION_JSON));
+    public void updateModel(String id, String name, String companyid, String updatedat) throws ClientErrorException {
+        Entity<?> empty = Entity.text("");
+        webTarget.path(java.text.MessageFormat.format("updatemodel/{0}/{1}/{2}/{3}", new Object[]{id, name, companyid, updatedat})).request().put(empty);
     }
 
     public void updateService(String id, String name, String description, String price, String isactive, String type, String updatedat) throws ClientErrorException {
@@ -241,8 +243,8 @@ public class AdminrestClient {
         webTarget.path(java.text.MessageFormat.format("updateactiveservice/{0}/{1}/{2}", new Object[]{id, isactive, updatedat})).request().put(empty);
     }
 
-    public void insertcompany(Object requestEntity, String name, String type, String createdat, String updatedat) throws ClientErrorException {
-        webTarget.path(java.text.MessageFormat.format("addcompany/{0}/{1}/{2}/{3}", new Object[]{name, type, createdat, updatedat})).request(javax.ws.rs.core.MediaType.APPLICATION_JSON).post(javax.ws.rs.client.Entity.entity(requestEntity, javax.ws.rs.core.MediaType.APPLICATION_JSON));
+    public void insertcompany(String name, String type, String createdat, String updatedat) throws ClientErrorException {
+        webTarget.path(java.text.MessageFormat.format("addcompany/{0}/{1}/{2}/{3}", new Object[]{name, type, createdat, updatedat})).request().post(null);
     }
 
     public void deletePartCategory(String id) throws ClientErrorException {
@@ -338,8 +340,9 @@ public class AdminrestClient {
         return resource.request(javax.ws.rs.core.MediaType.APPLICATION_JSON).get(responseType);
     }
 
-    public void updatePartCategory(Object requestEntity, String id, String name, String type, String description, String updatedat) throws ClientErrorException {
-        webTarget.path(java.text.MessageFormat.format("updatepartcategory/{0}/{1}/{2}/{3}/{4}", new Object[]{id, name, type, description, updatedat})).request(javax.ws.rs.core.MediaType.APPLICATION_JSON).put(javax.ws.rs.client.Entity.entity(requestEntity, javax.ws.rs.core.MediaType.APPLICATION_JSON));
+    public void updatePartCategory(String id, String name, String type, String description, String updatedat) throws ClientErrorException {
+        Entity<?> empty = Entity.text("");
+        webTarget.path(java.text.MessageFormat.format("updatepartcategory/{0}/{1}/{2}/{3}/{4}", new Object[]{id, name, type, description, updatedat})).request().put(empty);
     }
 
     public <T> T getStatesByName(Class<T> responseType, String name) throws ClientErrorException {

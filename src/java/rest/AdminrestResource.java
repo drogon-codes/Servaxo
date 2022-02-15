@@ -52,13 +52,11 @@ public class AdminrestResource {
 
     @POST
     @Path("addcompany/{name}/{type}/{createdat}/{updatedat}")
-    @Consumes(MediaType.APPLICATION_JSON)
     public void insertcompany(@PathParam("name") String name, String logo, @PathParam("type") String type, @PathParam("createdat") String createdAt, @PathParam("updatedat") String updatedAt){
         admin.insertcompany(name, logo, type, createdAt, updatedAt);
     }
     @PUT
     @Path("updatecompany/{id}/{name}/{type}/{updatedat}")
-    @Consumes(MediaType.APPLICATION_JSON)
     public void updateCompany(@PathParam("id")Integer id, @PathParam("name")String name, String logo, @PathParam("type")String type, @PathParam("updatedat")String updatedAt){
         admin.updateCompany(id, name, logo, type, updatedAt);
     }
@@ -99,14 +97,12 @@ public class AdminrestResource {
     
     @POST
     @Path("addmodel/{name}/{companyid}/{createdat}/{updatedat}")
-    @Consumes(MediaType.APPLICATION_JSON)
     public void insertModel(@PathParam("name")String name, @PathParam("companyid")Integer companyId, String image, @PathParam("createdat")String createdAt, @PathParam("updatedat")String updatedAt){
         admin.insertModel(name, companyId, image, createdAt, updatedAt);
     }
     
     @PUT
     @Path("updatemodel/{id}/{name}/{companyid}/{updatedat}")
-    @Consumes(MediaType.APPLICATION_JSON)
     public void updateModel(@PathParam("id")Integer id, @PathParam("name")String name, @PathParam("companyid")Integer companyId, String image, @PathParam("updatedat")String updatedAt){
         admin.updateModel(id, name, companyId, image, updatedAt);
     }
@@ -146,15 +142,13 @@ public class AdminrestResource {
     }
     
     @POST
-    @Path("addpartcategory/{name}/{type}/{description}/{createdat}/{updatedat}")
-    @Consumes(MediaType.APPLICATION_JSON)
-    public void insertPartCategory(@PathParam("name")String name, @PathParam("type")String type, String image, @PathParam("description")String des, @PathParam("createdat")String createdAt, @PathParam("updatedat")String updatedAt){
+    @Path("addpartcategory/{name}/{type}/{image}/{description}/{createdat}/{updatedat}")
+    public void insertPartCategory(@PathParam("name")String name, @PathParam("type")String type, @PathParam("image") String image, @PathParam("description")String des, @PathParam("createdat")String createdAt, @PathParam("updatedat")String updatedAt){
         admin.insertPartCategory(name, type, image, des, createdAt, updatedAt);
     }
     
     @PUT
     @Path("updatepartcategory/{id}/{name}/{type}/{description}/{updatedat}")
-    @Consumes(MediaType.APPLICATION_JSON)
     public void updatePartCategory(@PathParam("id")Integer id, @PathParam("name")String name, @PathParam("type")String type, String image, @PathParam("description")String des, @PathParam("updatedat")String updatedAt){
         admin.updatePartCategory(id, name, type, image, des, updatedAt);
     }
