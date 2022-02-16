@@ -148,8 +148,8 @@ public class AdminrestResource {
     }
     
     @PUT
-    @Path("updatepartcategory/{id}/{name}/{type}/{description}/{updatedat}")
-    public void updatePartCategory(@PathParam("id")Integer id, @PathParam("name")String name, @PathParam("type")String type, String image, @PathParam("description")String des, @PathParam("updatedat")String updatedAt){
+    @Path("updatepartcategory/{id}/{name}/{type}/{image}/{description}/{updatedat}")
+    public void updatePartCategory(@PathParam("id")Integer id, @PathParam("name")String name, @PathParam("type")String type, @PathParam("image")String image, @PathParam("description")String des, @PathParam("updatedat")String updatedAt){
         admin.updatePartCategory(id, name, type, image, des, updatedAt);
     }
     

@@ -59,8 +59,8 @@
                               </p:column>
 
                               <p:column headerText="Actions">
-                                  <h:commandButton class="btn btn-outline-primary btn-sm" value="Edit" action="#{cityCDI.redirectToEditCity}">
-                                      <f:setPropertyActionListener value="#{city}" target="#{cityCDI.currentCity}"/>
+                                  <h:commandButton class="btn btn-outline-primary btn-sm" value="Edit" action="#{partCategoryCDI.redirectToEditPartCategory}">
+                                      <f:setPropertyActionListener value="#{cat}" target="#{partCategoryCDI.currentPartCategory}"/>
                                   </h:commandButton> &nbsp;
                                   <h:commandButton class="btn btn-outline-danger btn-sm" value="Delete" action="#{partCategoryCDI.deletePartCategory(cat.partcategoryId)}"/>
                               </p:column>

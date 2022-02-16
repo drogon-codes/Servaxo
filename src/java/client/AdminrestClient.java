@@ -340,9 +340,9 @@ public class AdminrestClient {
         return resource.request(javax.ws.rs.core.MediaType.APPLICATION_JSON).get(responseType);
     }
 
-    public void updatePartCategory(String id, String name, String type, String description, String updatedat) throws ClientErrorException {
+    public void updatePartCategory(String id, String name, String type, String image , String description, String updatedat) throws ClientErrorException {
         Entity<?> empty = Entity.text("");
-        webTarget.path(java.text.MessageFormat.format("updatepartcategory/{0}/{1}/{2}/{3}/{4}", new Object[]{id, name, type, description, updatedat})).request().put(empty);
+        webTarget.path(java.text.MessageFormat.format("updatepartcategory/{0}/{1}/{2}/{3}/{4}/{5}", new Object[]{id, name, type, image, description, updatedat})).request().put(empty);
     }
 
     public <T> T getStatesByName(Class<T> responseType, String name) throws ClientErrorException {

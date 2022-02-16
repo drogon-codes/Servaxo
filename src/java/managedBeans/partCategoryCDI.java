@@ -138,6 +138,34 @@ public class partCategoryCDI {
         this.arc.deletePartCategory(partCategoryId.toString());
         return "viewPartCategory.xhtml?faces-redirect=true";
     }
+    
+    public String redirectToEditPartCategory(){
+        return "updatePartCategory.xhtml?faces-redirect=true";
+    }
+    
+    public void UpdateUpload(){
+            fileName = Paths.get(categoryImage.getSubmittedFileName()).getFileName().toString(); // MSIE fix.
+            savedFile = new File("C:\\Users\\c computer\\Documents\\NetBeansProjects\\Servaxo\\web\\uploads\\partCatImg", fileName);
+
+            try (InputStream input = categoryImage.getInputStream()) {
+                Files.copy(input, savedFile.toPath());
+            }
+            catch (IOException e) {
+                System.out.print(e);
+            }
+    }
+    
+    public String savePartCategory(){
+        partCategoryId = currentPartCategory.getPartcategoryId();
+        categoryName = currentPartCategory.getCategoryName();
+        vehicleType = currentPartCategory.getVehicleType();
+        categoryDescription = currentPartCategory.getCategoryDescription();
+        if(fileName==""){
+            fileName = currentPartCategory.getCategoryImg();
+        }
+        this.arc.updatePartCategory(partCategoryId.toString(), categoryName, vehicleType, fileName, categoryDescription, datetime);
+        return "viewPartCategories?faces-redirect=true";
+    }
     public partCategoryCDI() {
     }
     
