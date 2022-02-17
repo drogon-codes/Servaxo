@@ -1,0 +1,139 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Parts - Add Part</title>
+         <ui:include src="css.xhtml"/>
+    </h:head>
+    <h:body>
+        <ui:include src="sidebar.xhtml"/>
+        <div class="content ht-100v pd-0">
+            <div class="content-header">
+            </div><!-- content-header -->
+
+            <div class="content-body">
+              <div class="container pd-x-0 pd-lg-x-10 pd-xl-x-0">
+                <div class="d-sm-flex align-items-center justify-content-between mg-b-20 mg-lg-b-30">
+                  <div>
+                    <nav aria-label="breadcrumb">
+                      <ol class="breadcrumb breadcrumb-style1 mg-b-10">
+                        <li class="breadcrumb-item"><a href="dashboard.xhtml">Dashboard</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">Parts</li>
+                      </ol>
+                    </nav>
+                    <h4 class="mg-b-0 tx-spacing--1">Manage Parts - Add Part</h4>
+                  </div>
+                  <div class="d-none d-md-block">
+                      <button class="btn btn-sm pd-x-15 btn-secondary btn-uppercase mg-l-5" onclick="window.location='viewParts.xhtml'"><i data-feather="list" class="wd-10 mg-r-5"></i> View Parts</button>
+                  </div>
+                </div>
+
+                <div class="row row-xs">
+                    <div class="col-2">&nbsp;</div>
+                    <div class="col-8">
+                        <h:form enctype="multipart/form-data">
+                            <div class="form-group">
+                              <label for="formGroupExampleInput" class="d-block">Part Name</label>
+                              <p:inputText class="form-control" placeholder="Enter Part Name" value="#{partCDI.partName}" />
+                            </div>
+                            <div class="row">
+                                <div class="col-4">
+                                    <div class="form-group">
+                                        <label for="formGroupExampleInput2" class="d-block">Model</label>
+                                        <h:selectOneMenu class="form-control" value="#{partCDI.modelId}" required="true">
+                                            <f:selectItem itemLabel="--Select Model--" itemValue=""  />
+                                            <f:selectItems value="#{partCDI.getModels()}" var="model" itemValue="#{model.modelId}" itemLabel="#{model.modelName}"/>
+                                            <f:facet name="footer">
+                                              <p:divider styleClass="p-mt-0" />
+                                              <h:outputText value="3 options" style="font-weight:bold;"/>
+                                          </f:facet>
+                                        </h:selectOneMenu>
+                                      </div>
+                                </div>
+                                <div class="col-4">
+                                    <div class="form-group">
+                                        <label for="formGroupExampleInput2" class="d-block">Category</label>
+                                        <h:selectOneMenu class="form-control" value="#{partCDI.partCategoryId}" required="true">
+                                            <f:selectItem itemLabel="--Select Category--" itemValue=""  />
+                                            <f:selectItems value="#{partCDI.getPartCategories()}" var="cat" itemValue="#{cat.partcategoryId}" itemLabel="#{cat.categoryName}"/>
+                                            <f:facet name="footer">
+                                              <p:divider styleClass="p-mt-0" />
+                                              <h:outputText value="3 options" style="font-weight:bold;"/>
+                                          </f:facet>
+                                        </h:selectOneMenu>
+                                    </div>
+                                </div>
+                                <div class="col-4">
+                                    <div class="form-group">
+                                        <label for="formGroupExampleInput2" class="d-block">Price</label>
+                                        <p:inputText class="form-control" placeholder="Enter Price" value="#{partCDI.price}" />                          
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-4">
+                                    <div class="form-group">
+                                        <label for="formGroupExampleInput2" class="d-block">Image 1</label>
+                                        <h:inputFile class="form-control" value="#{partCDI.partImage1}">
+                                            <f:ajax listener="#{partCDI.upload1()}" />
+                                        </h:inputFile>
+                                    </div>
+                                </div>
+                                
+                                <div class="col-4">
+                                    <div class="form-group">
+                                        <label for="formGroupExampleInput2" class="d-block">Image 2</label>
+                                        <h:inputFile class="form-control" value="#{partCDI.partImage2}">
+                                            <f:ajax listener="#{partCDI.upload2()}" />
+                                        </h:inputFile>
+                                    </div>
+                                </div>
+                                
+                                <div class="col-4">
+                                    <div class="form-group">
+                                        <label for="formGroupExampleInput2" class="d-block">Image 3</label>
+                                        <h:inputFile class="form-control" value="#{partCDI.partImage3}">
+                                            <f:ajax listener="#{partCDI.upload3()}" />
+                                        </h:inputFile>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="row">
+                                <div class="col-6">
+                                    <div class="form-group">
+                                        <label for="formGroupExampleInput2" class="d-block">Manual PDF</label>
+                                        <h:inputFile class="form-control" value="#{partCDI.partManual}">
+                                            <f:ajax listener="#{partCDI.upload4()}" />
+                                        </h:inputFile>
+                                    </div>
+                                </div>
+                                
+                                <div class="col-6">
+                                    <div class="form-group">
+                                        <label for="formGroupExampleInput2" class="d-block">Video URL</label>
+                                        <p:inputText placeholder="Enter Video URL" class="form-control" value="#{partCDI.videoURL}"/>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                              <label for="formGroupExampleInput2" class="d-block">Description</label>
+                              <h:inputTextarea class="form-control" value="#{partCDI.partDescription}"/>
+                            </div>
+                            <p:commandButton styleClass="ui-button-primary" value="Submit" action="#{partCDI.insertPart()}" />&nbsp;
+                            <p:commandButton styleClass="ui-button-secondary" value="Cancel" onclick="window.location='viewStates.xhtml'" />
+                        </h:form>
+                     </div>
+                    <div class="col-2">&nbsp;</div>
+                </div><!-- row -->
+              </div><!-- container -->
+            </div>
+          </div><!-- content -->
+        <ui:include src="scripts.xhtml"/>
+    </h:body>
+</html>
+

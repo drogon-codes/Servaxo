@@ -106,4 +106,6 @@ public interface AdminLocal {
     Collection<TblOrder> getAllOrders();
     Collection<TblOrder> getOrdersById(Integer orderId);
     Collection<TblOrderdetail> getOrderDetailByOrderId(Integer orderId);
+
+    public String getIsActive(Integer id);
 }

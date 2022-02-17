@@ -1,0 +1,117 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+    <h:head>
+
+    <title>Admin - Parts</title>
+
+    <ui:include src="css.xhtml"/>
+    </h:head>
+    <h:body>
+        <ui:include src="sidebar.xhtml"/>
+        <div class="content ht-100v pd-0">
+            <div class="content-header">
+            </div><!-- content-header -->
+
+            <div class="content-body">
+              <div class="container pd-x-0 pd-lg-x-10 pd-xl-x-0">
+                <div class="d-sm-flex align-items-center justify-content-between mg-b-20 mg-lg-b-30">
+                  <div>
+                    <nav aria-label="breadcrumb">
+                      <ol class="breadcrumb breadcrumb-style1 mg-b-10">
+                        <li class="breadcrumb-item"><a href="dashboard.xhtml">Dashboard</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">Parts</li>
+                      </ol>
+                    </nav>
+                    <h4 class="mg-b-0 tx-spacing--1">Manage Parts - All Parts</h4>
+                  </div>
+                  <div class="d-none d-md-block">
+                      <button class="btn btn-sm pd-x-15 btn-primary btn-uppercase mg-l-5" onclick="window.location='addPart.xhtml'"><i data-feather="plus" class="wd-10 mg-r-5"></i> Add New Part</button>
+                  </div>
+                </div>
+
+                <div class="row row-xs">
+                    <h:form>
+                      <div class="card">
+                          <p:dataTable var="part" value="#{partCDI.allParts()}" class="table dataTable no-footer" rowIndexVar="x" rows="10" paginator="true" paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}" currentPageReportTemplate="{startRecord}-{endRecord} of {totalRecords} records" rowsPerPageTemplate="5,10,{ShowAll|'All'}" paginatorPosition="bottom" rowKey="#{partCDI.partId}">
+                              <p:column style="width:2rem">
+                                <p:rowToggler/>
+                              </p:column> 
+                              <p:column headerText="#">
+                                  <h:outputText value="#{x+1}" />
+                              </p:column>
+ 
+                              <p:column headerText="Name">
+                                  <h:outputText value="#{part.partName}" />
+                              </p:column>
+                              
+                              <p:column headerText="Price">
+                                  <h:outputText value="₹#{part.price}" />
+                              </p:column>
+                              
+                              <p:column headerText="Model">
+                                  <h:outputText value="#{part.modelId.modelName}" />
+                              </p:column>
+                              
+                              <p:column headerText="Category">
+                                  <h:outputText value="#{part.partcategoryId.categoryName}" />
+                              </p:column>
+                              
+                              <p:column headerText="Manual PDF">
+                                  <h:outputLink value="/Servaxo/uploads/partMan/#{part.partManualPdf}" target="_blank">#{part.partManualPdf}</h:outputLink>
+                              </p:column>
+                              
+                              <p:column headerText="Video URL">
+                                  <h:outputLink value="#{part.videoUrl}" target="_blank">#{part.videoUrl}</h:outputLink>
+                              </p:column>
+                              
+                              <p:column headerText="Active"> 
+                                  <h:inputText value="#{part.isactive}" disabled="true" class="form-control-sm" size="4" readonly="true"/>
+                                  <h:commandButton class="btn btn-outline-primary btn-xs" value="Change" action="#{partCDI.updateActive(part.partId)}"/>                      
+                              </p:column>
+
+                              <p:column headerText="Actions">
+                                  <h:commandButton class="btn btn-outline-primary btn-sm" value="Edit" action="#{partCDI.redirectToUpdatePart()}">
+                                      <f:setPropertyActionListener value="#{part}" target="#{partCDI.currentPart}"/>
+                                  </h:commandButton> &nbsp;
+                                  <h:commandButton class="btn btn-outline-danger btn-sm" value="Delete" action="#{partCDI.deletePart(part.partId)}"/>
+                              </p:column>
+                              
+                              <p:rowExpansion>
+                                  <div class="row">
+                                      <div class="col-4">
+                                          <div class="row">
+                                              <div class="col-4">
+                                                <h:graphicImage value="/uploads/partImg/#{part.img1}" height="100px" width="100px"/>&nbsp;
+                                              </div>
+                                              <div class="col-4">
+                                                <h:graphicImage value="/uploads/partImg/#{part.img2}" height="100px" width="100px"/>&nbsp;
+                                              </div>
+                                              <div class="col-4">
+                                                <h:graphicImage value="/uploads/partImg/#{part.img3}" height="100px" width="100px"/>&nbsp;
+                                              </div>
+                                          </div>
+                                      </div>
+                                      <div class="col-8">
+                                          <h:inputTextarea value="#{part.partDescription}" class="form-control" disabled="true" rows="3"/>
+                                      </div>
+                                  </div>
+                                    
+                                    <!--<h:outputText value=""/>-->
+                              </p:rowExpansion>
+                          </p:dataTable>
+                      </div>
+                  </h:form>   
+                </div><!-- row -->
+              </div><!-- container -->
+            </div>
+          </div><!-- content -->
+    <ui:include src="scripts.xhtml"/>
+    </h:body>
+</html>
+

@@ -277,6 +277,12 @@ public class Admin implements AdminLocal {
         tp.setUpdatedAt(updatedAt);
         em.merge(tp);
     }
+    
+    @Override
+    public String getIsActive(Integer id){
+        TblParts tp = em.find(TblParts.class, id);
+        return tp.getIsactive();
+    }
 
     @Override
     public void deletePart(Integer id) {

@@ -38,6 +38,7 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "TblParts.findByPartId", query = "SELECT t FROM TblParts t WHERE t.partId = :partId"),
     @NamedQuery(name = "TblParts.findByPartName", query = "SELECT t FROM TblParts t WHERE t.partName = :partName"),
     @NamedQuery(name = "TblParts.findByPrice", query = "SELECT t FROM TblParts t WHERE t.price = :price"),
+    @NamedQuery(name = "TblParts.getIsActive", query = "SELECT t.isactive FROM TblParts t WHERE t.partId = :partId"),
     @NamedQuery(name = "TblParts.findByIsactive", query = "SELECT t FROM TblParts t WHERE t.isactive = :isactive")})
 public class TblParts implements Serializable {
 

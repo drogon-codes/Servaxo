@@ -160,7 +160,7 @@ public class partCategoryCDI {
         categoryName = currentPartCategory.getCategoryName();
         vehicleType = currentPartCategory.getVehicleType();
         categoryDescription = currentPartCategory.getCategoryDescription();
-        if(fileName==""){
+        if(fileName==null){
             fileName = currentPartCategory.getCategoryImg();
         }
         this.arc.updatePartCategory(partCategoryId.toString(), categoryName, vehicleType, fileName, categoryDescription, datetime);
