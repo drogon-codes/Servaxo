@@ -6,7 +6,7 @@ import javax.annotation.Generated;
 import javax.persistence.metamodel.SingularAttribute;
 import javax.persistence.metamodel.StaticMetamodel;
 
-@Generated(value="EclipseLink-2.7.7.v20200504-rNA", date="2022-02-17T17:42:07")
+@Generated(value="EclipseLink-2.7.7.v20200504-rNA", date="2022-02-18T15:49:50")
 @StaticMetamodel(TblServicecart.class)
 public class TblServicecart_ { 
 

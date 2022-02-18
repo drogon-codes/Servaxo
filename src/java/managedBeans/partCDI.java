@@ -275,24 +275,24 @@ public class partCDI implements Serializable {
         return "viewParts.xhtml?faces-redirect=true";
     }
     
-    public String updateActive(Integer partId){
-        String isActiveStatus = al.getIsActive(partId);
-//        System.out.println(isActive);
-        if("no".equals(isActiveStatus)){
-            isActiveStatus="yes";
-        }
-        else if("yes".equals(isActiveStatus))
-        {
-            isActiveStatus="no";
-        }
-        else
-        {
-            isActiveStatus="sup";
-        }
-        this.al.updateActivePart(partId, isActiveStatus, datetime);
-//        this.arc.updateActivePart(partId.toString(), isActiveStatus, datetime);
-        return "viewParts.xhtml?faces-redirect=true";
-//        return isActive;
-    }
+//    public String updateActive(Integer partId){
+//        String isActiveStatus = al.getIsActive(partId);
+////        System.out.println(isActive);
+//        if("no".equals(isActiveStatus)){
+//            isActiveStatus="yes";
+//        }
+//        else if("yes".equals(isActiveStatus))
+//        {
+//            isActiveStatus="no";
+//        }
+//        else
+//        {
+//            isActiveStatus="sup";
+//        }
+//        this.al.updateActivePart(partId, isActiveStatus, datetime);
+////        this.arc.updateActivePart(partId.toString(), isActiveStatus, datetime);
+//        return "viewParts.xhtml?faces-redirect=true";
+////        return isActive;
+//    }
     
 }
