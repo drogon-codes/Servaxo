@@ -265,13 +265,15 @@ public class partCDI implements Serializable {
 //        this.arc.updatePart(partId.toString(), modelId.toString(), partCategoryId.toString(), partName, price.toString(), partDescription, fileName1, fileName2, fileName3, fileName4, videoURL, isActive, datetime);
         this.al.updatePart(partId, modelId, partCategoryId, partName, price, partDescription, fileName1, fileName2, fileName3, fileName4, videoURL, isActive, datetime);
         modelId = null;
+        partName = "";
         partCategoryId = null;
-        partDescription = null;
+        partDescription = "";
         partImage1 = null;
         partImage2 = null;
         partImage3 = null;
         partManual = null;
         videoURL = "";
+        price = null;
         return "viewParts.xhtml?faces-redirect=true";
     }
     

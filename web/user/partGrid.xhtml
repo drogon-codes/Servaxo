@@ -1,0 +1,55 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Facelet Title</title>
+    </h:head>
+    <h:body>
+        <div class="product card">
+            <h:form id="form">
+                <p:dataGrid var="product" value="#{userHome.allParts()}" columns="3" layout="grid"
+                            rows="6" paginator="true" paginatorPosition="top" id="cars"
+                            paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                            rowsPerPageTemplate="6,12,16">
+
+                    <f:facet name="header">
+                        Products for Sale
+                    </f:facet>
+
+                    <div class="product-grid-item card" style="margin-bottom: 0">
+                        <div class="product-grid-item-top">
+                            <div>
+                                <i class="pi pi-tag product-category-icon"/>
+                                <span class="product-category">#{product.partcategoryId.categoryName}</span>
+                            </div>
+                        </div>
+                        <div class="product-grid-item-content">
+                            <img src="/Servaxo/uploads/partImg/#{product.img1}" height="50%" width="75%" style="
+box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+margin: 2rem 0;"/>
+                            <!--<p:graphicImage name="/uploads/partImg/#{product.img1}"/>-->
+                            <div class="product-name">#{product.partName}</div>
+                            <div class="product-description">#{product.partDescription}</div>
+                        </div>
+                        <div class="product-grid-item-bottom">
+                            <h:outputText value="#{product.price}" styleClass="product-price">
+                                <f:convertNumber currencySymbol="$" type="currency"/>
+                            </h:outputText>
+                            <p:commandButton 
+                                             icon="pi pi-shopping-cart">
+                                
+                            </p:commandButton>
+                        </div>
+                    </div>
+
+                </p:dataGrid>
+
+                
+            </h:form>
+        </div>
+    </h:body>
+</html>
+
